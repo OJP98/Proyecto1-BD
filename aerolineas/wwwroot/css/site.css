@@ -2,81 +2,92 @@
 for details on configuring this project to bundle and minify static web assets. */
 
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+    white-space: normal;
+    text-align: right;
+    word-break: break-all;
 }
+
 
 /* Sticky footer styles
 -------------------------------------------------- */
+
 html {
-  font-size: 14px;
-  margin: 0;
-  max-width: 100%
+    font-size: 14px;
+    margin: 0;
+    max-width: 100%;
 }
+
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .border-top {
-  border-top: 1px solid #e5e5e5;
+    border-top: 1px solid #e5e5e5;
 }
+
 .border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 .box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
 
 button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+    font-size: 1rem;
+    line-height: inherit;
 }
+
 
 /* Sticky footer styles
 -------------------------------------------------- */
+
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
-  line-height:1.6;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    line-height: 1.6;
+    background: transparent;
 }
 
-#showcase{
-   background-image: url("../images/analisis.jpg");
-   background-size:cover;
-   background-position:center;
-   height:50vh;
-   justify-content:center;
-   align-items:center;
-   text-align:center;
-   padding:0 20px;
-   }
-   
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  /* Set the fixed height of the footer here */
-  height: 60px;
-  line-height: 60px; /* Vertically center the text there */
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    line-height: 60px;
+    /* Vertically center the text there */
 }
 
-#contenido .box1{
-   padding: 0 20px;
-   background: white;
-   background-image: url("../images/analisis.jpg");
-   height: 400px;
-   background-size: cover;
-   background-attachment: fixed;
-   background-position: center;
-   background-repeat: no-repeat;
+.navbar {
+    width: 100%;
+    padding: 20px;
+    position: fixed;
+    top: 0px;
+    text-align: center;
+    transition: .5s;
+}
+
+.navbar ul li {
+    list-style-type: none;
+    display: inline-block;
+    padding: 3px 20px;
+    color: white;
+    font-size: 20px;
+    font-family: 'BEARSKIN Demo', sans-serif;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: .5s;
+}
+
+.navbar ul li:hover {
+    background: #f4067d;
 }

@@ -4,43 +4,45 @@
 
 <style>
 
-/* Se agrega el efecto parallax */
-.parallaxInicio {
-  
-  background-image: url("../images/base-de-datos-2.jpg");
-  height: 570px;
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+
+html{
+    background: url("../images/fondo.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
+/* Se agrega el efecto parallax */
+.parallax {
+
+    background-image: url("../images/base-de-datos-2.jpg");
+    height: 570px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    }
+
 .titulo{
-    color: gold;
-    font-weight: 900;
-    text-align: center;
-    font-size: 3.5rem;
-    font-weight: 300;
-    line-height: 1.2;
-    text-shadow: 2px 2px 4px black;
+    color: black;
+    text-align: left;
     -webkit-text-stroke: 0.8px;
     -webkit-text-stroke-color: black;
 }
 
+.bloque{
+    background: transparent;
+}
+
 </style>
 
-<!-- Container element -->
-<div class="parallaxInicio">
-    <br><br><br>
-    <h1 class="titulo">Proyecto 1 - Bases de Datos</h1>
-</div>
+<body>
+    <!-- font-size: 3.5rem; -->
+    <br><br><br><br><br><br><br><br><br>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    <div>
+        <h1 class="titulo" style="font-size:3.0rem">Proyecto 1 - Aerolíneas</h1>
+        <h5>Análsisis de una base de datos orientada a aerolíneas.</h5>
+    </div>
+</body>

@@ -6,23 +6,12 @@
 
 
 html{
-    background: url("../images/fondo.jpg") no-repeat center center fixed;
+    background: url("../images/fondo2.jpg") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
 }
-
-/* Se agrega el efecto parallax */
-.parallax {
-
-    background-image: url("../images/base-de-datos-2.jpg");
-    height: 570px;
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    }
 
 .titulo{
     color: black;
@@ -44,5 +33,9 @@ html{
     <div>
         <h1 class="titulo" style="font-size:3.0rem">Proyecto 1 - Aerolíneas</h1>
         <h5>Análsisis de una base de datos orientada a aerolíneas.</h5>
+        <br>
+        <a asp-area="" asp-controller="Home" asp-action="Analisis">
+            <img src="../images/morebtn.png" width="20%" height="20%"/>
+        </a>
     </div>
 </body>

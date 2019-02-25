@@ -91,3 +91,7 @@ body {
 .navbar ul li:hover {
     background: #f4067d;
 }
+
+a {
+    text-decoration: none;
+}

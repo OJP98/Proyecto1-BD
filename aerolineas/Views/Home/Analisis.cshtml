@@ -1,80 +1,394 @@
 ﻿@{
     ViewData["Title"] = "Análisis";
 }
-<header id="showcase">
+
+<style>
+
+html{
+    background: url("../images/fondo.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 0px 0px;
+    margin: 0;
+}
+
+.navbar{
+  position: relative;
+}
+
+body{
+  padding: 0px 0px;
+  margin: 0;
+}
+
+header{
+  padding: 0px 0px;
+  margin: 0;
+}
+
+/* Se agrega el efecto parallax */
+.parallax {
+
+    background-image: url("../images/analisis.jpg");
+    height: 570px;
+    width: 100%;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
+}
+
+.column {
+  float: left;
+  width: 50%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+code {
+  color: rgb(49,49,49);
+  font-family: Consolas,monospace,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,sans-serif;
+  background-color: rgba(245, 245, 245);
+  margin-right: 35px;
+  padding-left: 3px;
+  border: 1px solid;
+  box-shadow: 2px 2px 5px grey;
+}
+
+</style>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+
+  // Load the Visualization API and the corechart package.
+  google.charts.load('current', {packages:['corechart', 'bar']});
+
+  // Set a callback to run when the Google Visualization API is loaded.
+  google.charts.setOnLoadCallback(drawChart);
+
+  // Callback that creates and populates a data table,
+  // instantiates the pie chart, passes in the data and
+  // draws it.
+  function drawChart() {
+
+    var data = google.visualization.arrayToDataTable([
+      ['Nombre', 'Porporción', { role: 'style' }],
+      ['SkyWest Airlines Inc.', 16.7, 'blue'],            // RGB value
+      ['Alaska Airlines Inc.', 19.1, 'green'],            // English color name
+      ['Mesa Airlines Inc.', 19.9, 'gold'],
+      ['Spirit Air Lines', 20.2, 'silver' ],
+      ['United Air Lines Inc.', 23.1, 'red'], // CSS-style declaration
+      ]);
+
+    // Set chart options
+    var options = {
+      title:'Proporción de top 5 aerolíneas',
+      'width':'100%',
+      'height':285,
+      chartArea: {width: '50%', height: '50%'},
+      hAxis: {title: 'Proporción', minValue: 0},
+      vAxis: {title: 'Aerolíneas'}
+    };
+
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.BarChart(document.getElementById('chart2'));
+    //var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+    chart.draw(data, options);
+  }
+
+</script>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+
+  // Load the Visualization API and the corechart package.
+  google.charts.load('current', {packages:['corechart', 'bar']});
+
+  // Set a callback to run when the Google Visualization API is loaded.
+  google.charts.setOnLoadCallback(drawChart);
+
+  // Callback that creates and populates a data table,
+  // instantiates the pie chart, passes in the data and
+  // draws it.
+  function drawChart() {
+
+    var data = google.visualization.arrayToDataTable([
+      ['Nombre', 'Porporción'],
+      ['SkyWest Airlines Inc.', 16.7],            // RGB value
+      ['Alaska Airlines Inc.', 19.1],            // English color name
+      ['Mesa Airlines Inc.', 19.9],
+      ['Spirit Air Lines', 20.2],
+      ['United Air Lines Inc.', 23.1,], // CSS-style declaration
+      ]);
+
+    // Set chart options
+    var options = {
+      title:'Proporción de top 5 aerolíneas',
+      'width': '100%',
+      'height': 285
+    };
+
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.PieChart(document.getElementById('chart1'));
+    //var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+    chart.draw(data, options);
+  }
+
+</script>
+
+<!-- Imagen  parallax con título en el centro -->
+<br><hr><br>
+<div class="parallax">
+
+  <br><br>
+  <h1>Análisis de los Datos</h1>
+
+</div>
+
+
+<!-- Línea de división con el resto de la página -->
+<br>
+<hr>
+<br>
+
+<!-- Comienzo de las mecánicas principales -->
+<div style="text-align: center">
+  <h1>Mecánicas principales del análisis</h1>
+  <p>
+    La idea principal del análisis está basasda en consultar características importantes que hace de una aerolínea, una buena.
+    En principio, una buena aerolínea consiste de una variedad de destinos y horarios de salida, puntualidad tanto en despegues como en aterrizajes, entre otros.
+    Es por ello, que planteamos 10 preguntas las cuales consideramos que toda buena aerolínea debe cumplir. Ya que hay algunos aspectos más importantes que otros, se le dió una ponderación específica a cada 'pregunta'.
+    Finalmente, se sumó la cantidad de puntos que tuvieron las aerolíneas en base a dicha ponderación junto con un análisis para llegar a las top 3 aerolíneas más fiables para invertir.
+  </p>
+</div>
+
+<br>
+
+<h2 style="text-align: center">10 características que toda buena aerolínea debe tener</h2>
+
+<br>
+
+<div style=text-align:center>
+  <h3>1. ¿Qué tan a menudo se retrasan los vuelos en comparación a la cantidad de estos?</h3>
+  <p>No sé si poner información aquí...</p>
+</div>
+
+<br>
+<div class="row">
+  <div class="column">
+    <p style=text-align:center>Resolución del query: </p>
+    <code style="display: block">
+      <p>
+        SELECT c.Description as AEROLINEA,CAST (count (*) AS float) / ( <br />
+        &nbsp SELECT count(*) <br />
+        &nbsp FROM ontime o1 <br />
+        &nbsp WHERE o1.Cancelled = 0 <br />
+        &nbsp &nbsp AND o1.Reporting_Airline = o.Reporting_Airline <br />
+        &nbsp ) * 100 AS PROPORCION <br />
+        FROM ontime o <br />
+        INNER JOIN carrier_history c ON o.Reporting_Airline = c.Code <br />
+        WHERE Cancelled = 1 <br />
+        &nbsp AND CancellationCode = 'A' <br />
+        GROUP BY o.Reporting_Airline <br />
+        ORDER BY PROPORCION ASC;
+      </p>
+    </code>
+  </div>
+  <div class="column">
+    <p style=text-align:center>Gráfica representativa:</p>
+    <div id="chart1"></div>
+  </div>
+</div>
+
+<br>
+
+<div style=text-align:center>
+  <h3>2. ¿Qué proporción de vuelos se cancelan debido al código A (Carrier)?</h3>
+  <p>La pizza de Don Crangejo es la mejor</p>
+</div>
+
+<br>
+<div class="row">
+  <div class="column">
+    <p style=text-align:center>Resolución del query: </p>
+    <code style="display: block">
+      <p>
+        SELECT c.Description as AEROLINEA,CAST (count (*) AS float) / ( <br />
+        &nbsp SELECT count(*) <br />
+        &nbsp FROM ontime o1 <br />
+        &nbsp WHERE o1.Cancelled = 0 <br />
+        &nbsp &nbsp AND o1.Reporting_Airline = o.Reporting_Airline <br />
+        &nbsp ) * 100 AS PROPORCION <br />
+        FROM ontime o <br />
+        INNER JOIN carrier_history c ON o.Reporting_Airline = c.Code <br />
+        WHERE Cancelled = 1 <br />
+        &nbsp AND CancellationCode = 'A' <br />
+        GROUP BY o.Reporting_Airline <br />
+        ORDER BY PROPORCION ASC;
+      </p>
+    </code>
+  </div>
+  <div class="column">
+    <p style=text-align:center>Gráfica representativa:</p>
+    <div id="chart2"></div>
+  </div>
+</div>
+
+<br><br><br><br><hr><br><br><br><br>
+
+<div class="row">
+  <!-- Inicio de los querys pares -->
+  <div class="column">
+
+    <!-- Primer Query -->
+    <h3 style="text-align: left">1.	¿Qué tan a menudo se retrasan los vuelos en comparación a la cantidad de estos?</h3>
+    <p>No sé si poner información aquí...</p>
+    <code style="display: block; text-align:left">
+      <p>
+        SELECT c.Description as AEROLINEA,CAST (count (*) AS float) / ( <br />
+        &nbsp SELECT count(*) <br />
+        &nbsp FROM ontime o1 <br />
+        &nbsp WHERE o1.Cancelled = 0 <br />
+        &nbsp &nbsp AND o1.Reporting_Airline = o.Reporting_Airline <br />
+        &nbsp ) * 100 AS PROPORCION <br />
+        FROM ontime o <br />
+        INNER JOIN carrier_history c ON o.Reporting_Airline = c.Code <br />
+        WHERE Cancelled = 1 <br />
+        &nbsp AND CancellationCode = 'A' <br />
+        GROUP BY o.Reporting_Airline <br />
+        ORDER BY PROPORCION ASC;
+      </p>
+    </code>
+
     <br>
-    <h1 style="text-align: center">Análisis de los Datos</h1>
-    <br><br><br><br><br><br><br><br><br><br><br><br>
+
+    <!-- Tercer Query -->
+    <h3 style="text-align: left">3. ¿Cuál es el promedio de vuelos que las aerolíneas realizan mensualmente?</h3>
+    <p>Texto texto texto texto...</p>
+    <code style="display: block; text-align:left">
+      <p>
+        SELECT c.Description as AEROLINEA,CAST (count (*) AS float) / ( <br />
+        &nbsp SELECT count(*) <br />
+        &nbsp FROM ontime o1 <br />
+        &nbsp WHERE o1.Cancelled = 0 <br />
+        &nbsp &nbsp AND o1.Reporting_Airline = o.Reporting_Airline <br />
+        &nbsp ) * 100 AS PROPORCION <br />
+        FROM ontime o <br />
+        INNER JOIN carrier_history c ON o.Reporting_Airline = c.Code <br />
+        WHERE Cancelled = 1 <br />
+        &nbsp AND CancellationCode = 'A' <br />
+        GROUP BY o.Reporting_Airline <br />
+        ORDER BY PROPORCION ASC;
+      </p>
+    </code>
+
+    <br>
+
+  </div>
 
 
+  <!-- Inicio de querys pares -->
+  <div class="column">
 
-    <html>
-  <head>
-    <!--Load the AJAX API-->
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
+    <!-- Segundo Query -->
+    <h3 style="text-align: left">2. ¿Qué proporción de vuelos se cancelan debido al código A (Carrier)?</h3>
+    <p>Deja de leer esto tonto, no dice nada interesante...</p>
+    <code style="display: block; text-align:left">
+      <p>
+        SELECT c.Description as AEROLINEA,CAST (count (*) AS float) / ( <br />
+        &nbsp SELECT count(*) <br />
+        &nbsp FROM ontime o1 <br />
+        &nbsp WHERE o1.Cancelled = 0 <br />
+        &nbsp &nbsp AND o1.Reporting_Airline = o.Reporting_Airline <br />
+        &nbsp ) * 100 AS PROPORCION <br />
+        FROM ontime o <br />
+        INNER JOIN carrier_history c ON o.Reporting_Airline = c.Code <br />
+        WHERE Cancelled = 1 <br />
+        &nbsp AND CancellationCode = 'A' <br />
+        GROUP BY o.Reporting_Airline <br />
+        ORDER BY PROPORCION ASC;
+      </p>
+    </code>
 
-      // Load the Visualization API and the corechart package.
-      google.charts.load('current', {'packages':['corechart']});
+    <div id="chart2"></div>
 
-      // Set a callback to run when the Google Visualization API is loaded.
-      google.charts.setOnLoadCallback(drawChart);
+    <br>
 
-      // Callback that creates and populates a data table,
-      // instantiates the pie chart, passes in the data and
-      // draws it.
-      function drawChart() {
+    <!-- Cuarto Query -->
+    <h3 style="text-align: left">4. ¿Qué proporción de vuelos se cancelan debido al código A (Carrier)?</h3>
+    <p>Seguis leyendo esto vos? Lgp...</p>
+    <code style="display: block; text-align:left">
+      <p>
+        SELECT ch.Description as AEROLINEA, MAX(o.Distance) as DIST <br />
+        FROM carrier_history ch <br />
+        INNER JOIN ontime o ON ch.Code = o.Reporting_Airline <br />
+        GROUP BY ch.Code <br />
+        ORDER BY DIST DESC;
+      </p>
+    </code>
 
-        // Create the data table.
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Topping');
-        data.addColumn('number', 'Slices');
-        data.addRows([
-          ['Mujeres', 3],
-          ['Hombres', 1],
-          ['Homosexuales', 1],
-          ['Familia', 1],
-          ['Amigos', 2]
-        ]);
+    <br>
 
-        // Set chart options
-        var options = {'title':'Que tan feo es el perro de Oscar',
-                       'width':400,
-                       'height':300};
+    <!-- Sexto Query -->
+    <h3 style="text-align: left">6.	¿Qué tan frecuentemente un vuelo sale tarde en comparación con la cantidad de vuelos, por culpa propia de la aerolínea?</h3>
+    <p>Nyan nyan nyan nyan nyan</p>
+    <code style="display: block; text-align:left">
+      <p>
+        SELECT c.Description as AEROLINEA,CAST (count (*) AS float) / ( <br />
+        &nbsp SELECT count(*) <br />
+        &nbsp FROM ontime o1 <br />
+        &nbsp WHERE o1.Cancelled = 0  <br />
+        &nbsp &nbsp AND o1.Reporting_Airline = o.Reporting_Airline <br />
+        &nbsp ) * 100 AS PROPORCION <br />
+        FROM ontime o <br />
+        INNER JOIN carrier_history c ON o.Reporting_Airline = c.Code <br />
+        WHERE o.CarrierDelay > 0 AND o.DepDelay > 0  <br />
+        &nbsp AND o.Cancelled = 0 <br />
+        GROUP BY o.Reporting_Airline <br />
+        ORDER BY PROPORCION ASC;
+      </p>
+    </code>
 
-        // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-        //var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-      }
-    </script>
-  </head>
+    <br>
 
-  <body>
-    <!--Div that will hold the pie chart-->
-    <div id="chart_div"></div>
-  </body>
-</html>
+    <!-- Octavo Query -->
+    <h3 style="text-align: left">8.	¿Qué aerolíneas tienen la mayor cantidad de destinos?</h3>
+    <p>Juas juas juas juas juas juas juas</p>
+    <code style="display: block; text-align:left">
+      <p>
+        SELECT c.Description, count(DISTINCT o.DestCityName) as TOTAL <br />
+        FROM ontime o <br />
+        INNER JOIN carrier_history c ON o.Reporting_Airline = c.Code <br />
+        GROUP BY c.Code <br />
+        ORDER BY TOTAL DESC;
+      </p>
+    </code>
 
+    <br>
 
+    <!-- Décimo Query -->
+    <h3 style="text-align: left">10. ¿Qué tan activa es una aerolínea en relación con su historial de tiempo operando?</h3>
+    <p>La pizza de Don Cangrejo es la mejor</p>
+    <code style="display: block; text-align:left">
+      <p>
+        SELECT ch.Description as AEROLINEA, CAST (count(*)/3 as float) as PROM_3M <br />
+        FROM carrier_history ch <br />
+        INNER JOIN ontime o ON ch.Code = o.Reporting_Airline <br />
+        WHERE o.Year = 2018 AND o.Month > 9 <br />
+        GROUP BY o.Reporting_Airline <br />
+        ORDER BY PROM_3M DESC;
+      </p>
+    </code>
 
+  </div>
+</div>
 
-
-
-
-
-
-
-
-    <h1 style="text-align: center">Análisis de los Datos</h1>
-
-
-
-    
-
-
-
-
-
-
-</header>
+<br><br><br><br><br><br><br><br><br><br><br><br>

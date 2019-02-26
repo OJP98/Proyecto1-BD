@@ -56,7 +56,7 @@ header{
 code {
   color: rgb(49,49,49);
   font-family: Consolas,monospace,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,sans-serif;
-  background-color: rgba(245, 245, 245);
+  background-color: rgba(245, 245, 245, 0.5);
   margin-right: 35px;
   padding-left: 3px;
   border: 1px solid;
@@ -66,83 +66,6 @@ code {
 </style>
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
-
-  // Load the Visualization API and the corechart package.
-  google.charts.load('current', {packages:['corechart', 'bar']});
-
-  // Set a callback to run when the Google Visualization API is loaded.
-  google.charts.setOnLoadCallback(drawChart);
-
-  // Callback that creates and populates a data table,
-  // instantiates the pie chart, passes in the data and
-  // draws it.
-  function drawChart() {
-
-    var data = google.visualization.arrayToDataTable([
-      ['Nombre', 'Porporción', { role: 'style' }],
-      ['SkyWest Airlines Inc.', 16.7, 'blue'],            // RGB value
-      ['Alaska Airlines Inc.', 19.1, 'green'],            // English color name
-      ['Mesa Airlines Inc.', 19.9, 'gold'],
-      ['Spirit Air Lines', 20.2, 'silver' ],
-      ['United Air Lines Inc.', 23.1, 'red'], // CSS-style declaration
-      ]);
-
-    // Set chart options
-    var options = {
-      title:'Proporción de top 5 aerolíneas',
-      'width':'100%',
-      'height':285,
-      chartArea: {width: '50%', height: '50%'},
-      hAxis: {title: 'Proporción', minValue: 0},
-      vAxis: {title: 'Aerolíneas'}
-    };
-
-    // Instantiate and draw our chart, passing in some options.
-    var chart = new google.visualization.BarChart(document.getElementById('chart2'));
-    //var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
-    chart.draw(data, options);
-  }
-
-</script>
-
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
-
-  // Load the Visualization API and the corechart package.
-  google.charts.load('current', {packages:['corechart', 'bar']});
-
-  // Set a callback to run when the Google Visualization API is loaded.
-  google.charts.setOnLoadCallback(drawChart);
-
-  // Callback that creates and populates a data table,
-  // instantiates the pie chart, passes in the data and
-  // draws it.
-  function drawChart() {
-
-    var data = google.visualization.arrayToDataTable([
-      ['Nombre', 'Porporción'],
-      ['SkyWest Airlines Inc.', 16.7],            // RGB value
-      ['Alaska Airlines Inc.', 19.1],            // English color name
-      ['Mesa Airlines Inc.', 19.9],
-      ['Spirit Air Lines', 20.2],
-      ['United Air Lines Inc.', 23.1,], // CSS-style declaration
-      ]);
-
-    // Set chart options
-    var options = {
-      title:'Proporción de top 5 aerolíneas',
-      'width': '100%',
-      'height': 285
-    };
-
-    // Instantiate and draw our chart, passing in some options.
-    var chart = new google.visualization.PieChart(document.getElementById('chart1'));
-    //var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
-    chart.draw(data, options);
-  }
-
-</script>
 
 <!-- Imagen  parallax con título en el centro -->
 <br><hr><br>
@@ -162,11 +85,11 @@ code {
 <!-- Comienzo de las mecánicas principales -->
 <div style="text-align: center">
   <h1>Mecánicas principales del análisis</h1>
-  <p>
-    La idea principal del análisis está basasda en consultar características importantes que hace de una aerolínea, una buena.
-    En principio, una buena aerolínea consiste de una variedad de destinos y horarios de salida, puntualidad tanto en despegues como en aterrizajes, entre otros.
-    Es por ello, que planteamos 10 preguntas las cuales consideramos que toda buena aerolínea debe cumplir. Ya que hay algunos aspectos más importantes que otros, se le dió una ponderación específica a cada 'pregunta'.
-    Finalmente, se sumó la cantidad de puntos que tuvieron las aerolíneas en base a dicha ponderación junto con un análisis para llegar a las top 3 aerolíneas más fiables para invertir.
+  <p style="text-align: justify">
+    La idea principal del análisis está basasda en consultar características importantes que hace de una aerolínea, eficiente.
+    En principio, una buena aerolínea consiste de una variedad de destinos, puntualidad tanto en despegues como en aterrizajes, actividad que ha tenido, entre otros aspectos.
+    Es por ello, que planteamos 10 preguntas las cuales consideramos que toda buena aerolínea debe cumplir. Aquellas que mejor cumplan con los requisitos planteados, se le sumarán más puntos que el resto para así considerar una gama más alta de aerolíneas a tomar en cuenta.
+    Finalmente, se sumó la cantidad de puntos que tuvieron las aerolíneas y, junto con un amplio análisis, se llegó a las top 3 aerolíneas más fiables para invertir.
   </p>
 </div>
 
@@ -176,6 +99,7 @@ code {
 
 <br>
 
+<!-- PRIMER QUERY -->
 <div style=text-align:center>
   <h3>1. ¿Qué tan a menudo se retrasan los vuelos en comparación a la cantidad de estos?</h3>
   <p>No sé si poner información aquí...</p>
@@ -187,18 +111,21 @@ code {
     <p style=text-align:center>Resolución del query: </p>
     <code style="display: block">
       <p>
-        SELECT c.Description as AEROLINEA,CAST (count (*) AS float) / ( <br />
-        &nbsp SELECT count(*) <br />
-        &nbsp FROM ontime o1 <br />
-        &nbsp WHERE o1.Cancelled = 0 <br />
-        &nbsp &nbsp AND o1.Reporting_Airline = o.Reporting_Airline <br />
-        &nbsp ) * 100 AS PROPORCION <br />
+        SELECT o.Reporting_Airline, <br />
+        &nbsp &nbsp (((SELECT COUNT(*) <br />
+        &nbsp &nbsp FROM ontime o1 <br />
+        &nbsp &nbsp WHERE o1.DepDelayMinutes != 0 <br />
+        &nbsp &nbsp &nbsp AND o1.Month >= 9 <br />
+        &nbsp &nbsp &nbsp AND o1.Year = 2018 <br />
+        &nbsp &nbsp &nbsp AND o.Reporting_Airline = o1.Reporting_Airline) / 3.0) / <br />
+        &nbsp &nbsp ((SELECT COUNT(*) <br />
+        &nbsp &nbsp FROM ontime o2 <br />
+        &nbsp &nbsp WHERE o2.Month >= 9 and o2.Year = 2018 <br />
+        &nbsp &nbsp &nbsp AND o.Reporting_Airline = o2.Reporting_Airline) / 3.0)) * <br />
+              100 AS "FRECUENCIA" <br />
         FROM ontime o <br />
-        INNER JOIN carrier_history c ON o.Reporting_Airline = c.Code <br />
-        WHERE Cancelled = 1 <br />
-        &nbsp AND CancellationCode = 'A' <br />
         GROUP BY o.Reporting_Airline <br />
-        ORDER BY PROPORCION ASC;
+        ORDER BY FRECUENCIA ASC;
       </p>
     </code>
   </div>
@@ -208,11 +135,17 @@ code {
   </div>
 </div>
 
-<br>
+<br><br>
 
+<!-- SEGUNDO QUERY -->
 <div style=text-align:center>
   <h3>2. ¿Qué proporción de vuelos se cancelan debido al código A (Carrier)?</h3>
-  <p>La pizza de Don Crangejo es la mejor</p>
+  <p style="text-align:justify">
+    En el día a día, una gran cantidad de vuelos son cancelados.
+    De hecho, las razones por las que se cancela un vuelo son: Debido al clima, seguridad, tráfico aéreo y por culpa de la misma aerolínea.
+    En este query, se consideró esta última razón como la más importante. Lo que en realidad nos interesa saber es la proporción de vuelos
+    que se cancelan por culpa de la propia aerolínea.
+    </p>
 </div>
 
 <br>
@@ -241,106 +174,144 @@ code {
     <div id="chart2"></div>
   </div>
 </div>
+<br><br>
+<div id="chart2A"></div>
 
-<br><br><br><br><hr><br><br><br><br>
+<br><br>
 
+<!-- TERCER QUERY -->
+<div style=text-align:center>
+  <h3>3. ¿Cuál es el promedio de vuelos mensuales que realizan las aerolíneas?</h3>
+  <p>Que rico huele el pepian</p>
+</div>
+
+<br>
 <div class="row">
-  <!-- Inicio de los querys pares -->
   <div class="column">
-
-    <!-- Primer Query -->
-    <h3 style="text-align: left">1.	¿Qué tan a menudo se retrasan los vuelos en comparación a la cantidad de estos?</h3>
-    <p>No sé si poner información aquí...</p>
-    <code style="display: block; text-align:left">
+    <p style=text-align:center>Resolución del query: </p>
+    <code style="display: block">
       <p>
-        SELECT c.Description as AEROLINEA,CAST (count (*) AS float) / ( <br />
-        &nbsp SELECT count(*) <br />
-        &nbsp FROM ontime o1 <br />
-        &nbsp WHERE o1.Cancelled = 0 <br />
-        &nbsp &nbsp AND o1.Reporting_Airline = o.Reporting_Airline <br />
-        &nbsp ) * 100 AS PROPORCION <br />
+        SELECT o.Reporting_Airline, <br />
+        &nbsp ((SELECT COUNT(*)  <br />
+        &nbsp FROM ontime o1  <br />
+        &nbsp WHERE o1.Year = 2018  <br />
+        &nbsp &nbsp AND o.Reporting_Airline = o1.Reporting_Airline <br />
+        &nbsp ) / 11) as "PROMEDIO" <br />
         FROM ontime o <br />
-        INNER JOIN carrier_history c ON o.Reporting_Airline = c.Code <br />
-        WHERE Cancelled = 1 <br />
-        &nbsp AND CancellationCode = 'A' <br />
         GROUP BY o.Reporting_Airline <br />
-        ORDER BY PROPORCION ASC;
+        ORDER BY PROMEDIO DESC;
       </p>
     </code>
-
-    <br>
-
-    <!-- Tercer Query -->
-    <h3 style="text-align: left">3. ¿Cuál es el promedio de vuelos que las aerolíneas realizan mensualmente?</h3>
-    <p>Texto texto texto texto...</p>
-    <code style="display: block; text-align:left">
-      <p>
-        SELECT c.Description as AEROLINEA,CAST (count (*) AS float) / ( <br />
-        &nbsp SELECT count(*) <br />
-        &nbsp FROM ontime o1 <br />
-        &nbsp WHERE o1.Cancelled = 0 <br />
-        &nbsp &nbsp AND o1.Reporting_Airline = o.Reporting_Airline <br />
-        &nbsp ) * 100 AS PROPORCION <br />
-        FROM ontime o <br />
-        INNER JOIN carrier_history c ON o.Reporting_Airline = c.Code <br />
-        WHERE Cancelled = 1 <br />
-        &nbsp AND CancellationCode = 'A' <br />
-        GROUP BY o.Reporting_Airline <br />
-        ORDER BY PROPORCION ASC;
-      </p>
-    </code>
-
-    <br>
-
   </div>
-
-
-  <!-- Inicio de querys pares -->
   <div class="column">
+    <p style=text-align:center>Gráfica representativa:</p>
+    <div id="chart2"></div>
+  </div>
+</div>
 
-    <!-- Segundo Query -->
-    <h3 style="text-align: left">2. ¿Qué proporción de vuelos se cancelan debido al código A (Carrier)?</h3>
-    <p>Deja de leer esto tonto, no dice nada interesante...</p>
-    <code style="display: block; text-align:left">
+<br><br>
+
+<!-- CUARTO QUERY -->
+<div style=text-align:center>
+  <h3>4. ¿Qué aerolíneas aerolíneas tienen la mayor cantidad de destinos?</h3>
+  <p style="text-align:justify">
+    Cuando deseamos viajar a sitios no tan populares, es importante saber qué aerolíneas nos pueden llevar
+    a dichos lugares. Por ello, esta consulta nos hará saber que aerolíneas serán capaces de llegar a lugares que 
+    otras no.
+  </p>
+</div>
+
+<br>
+<div class="row">
+  <div class="column">
+    <p style=text-align:center>Resolución del query: </p>
+    <code style="display: block">
       <p>
-        SELECT c.Description as AEROLINEA,CAST (count (*) AS float) / ( <br />
-        &nbsp SELECT count(*) <br />
-        &nbsp FROM ontime o1 <br />
-        &nbsp WHERE o1.Cancelled = 0 <br />
-        &nbsp &nbsp AND o1.Reporting_Airline = o.Reporting_Airline <br />
-        &nbsp ) * 100 AS PROPORCION <br />
+        SELECT c.Description, count(DISTINCT o.DestCityName) as TOTAL <br />
         FROM ontime o <br />
         INNER JOIN carrier_history c ON o.Reporting_Airline = c.Code <br />
-        WHERE Cancelled = 1 <br />
-        &nbsp AND CancellationCode = 'A' <br />
-        GROUP BY o.Reporting_Airline <br />
-        ORDER BY PROPORCION ASC;
+        GROUP BY c.Code <br />
+        ORDER BY TOTAL DESC;
       </p>
     </code>
+  </div>
+  <div class="column">
+    <p style=text-align:center>Gráfica representativa:</p>
+    <div id="chart4"></div>
+  </div>
+</div>
 
-    <div id="chart2"></div>
+<br><br>
 
-    <br>
+<!--  QUINTO QUERY -->
+<div style=text-align:center>
+  <h3>5. ¿Qué tan puntuales son los vuelos de las aerolíneas en comparación a la cantidad de viajes?</h3>
+  <p>El sudo del catedrático forma continentes.</p>
+</div>
 
-    <!-- Cuarto Query -->
-    <h3 style="text-align: left">4. ¿Qué proporción de vuelos se cancelan debido al código A (Carrier)?</h3>
-    <p>Seguis leyendo esto vos? Lgp...</p>
-    <code style="display: block; text-align:left">
+<br>
+<div class="row">
+  <div class="column">
+    <p style=text-align:center>Resolución del query: </p>
+    <code style="display: block">
       <p>
-        SELECT ch.Description as AEROLINEA, MAX(o.Distance) as DIST <br />
-        FROM carrier_history ch <br />
-        INNER JOIN ontime o ON ch.Code = o.Reporting_Airline <br />
-        GROUP BY ch.Code <br />
-        ORDER BY DIST DESC;
+        SELECT o.Reporting_Airline, <br />
+        &nbsp ( <br />
+        &nbsp &nbsp ( <br />
+        &nbsp &nbsp &nbsp ( <br />
+        &nbsp &nbsp &nbsp SELECT SUM(o1.DepDelayMinutes) <br />
+        &nbsp &nbsp &nbsp FROM ontime o1 <br />
+        &nbsp &nbsp &nbsp WHERE o.Reporting_Airline = o1.Reporting_Airline <br />
+        &nbsp &nbsp &nbsp &nbsp AND o1.Year = 2018 <br />
+        &nbsp &nbsp &nbsp GROUP BY o1.Month, o1.DayofMonth <br />
+        &nbsp &nbsp &nbsp ) + <br />
+        &nbsp &nbsp &nbsp ( <br />
+        &nbsp &nbsp &nbsp SELECT SUM(o2.ArrDelayMinutes) <br />
+        &nbsp &nbsp &nbsp FROM ontime o2 <br />
+        &nbsp &nbsp &nbsp WHERE o.Reporting_Airline = o2.Reporting_Airline <br />
+        &nbsp &nbsp &nbsp &nbsp AND o2.Year = 2018 <br />
+        &nbsp &nbsp &nbsp GROUP BY o2.Month, o2.DayofMonth <br />
+        &nbsp &nbsp ) <br />
+        &nbsp ) / 334 <br />
+        ) AS "MINUTOS_DE_RETRASO_POR_DIA",        <br />
+        &nbsp ( <br />
+        &nbsp &nbsp ( <br />
+        &nbsp &nbsp &nbsp SELECT COUNT() <br />
+        &nbsp &nbsp &nbsp FROM ontime o3 <br />
+        &nbsp &nbsp &nbsp WHERE o.Reporting_Airline = o3.Reporting_Airline <br />
+        &nbsp &nbsp &nbsp &nbsp AND o3.Year = 2018 <br />
+        &nbsp &nbsp &nbsp GROUP BY o3.Month, o3.DayofMonth <br />
+        &nbsp &nbsp ) * 1.0 / 334 <br />
+        &nbsp ) AS "CANT_VUELOS_POR_DIA" <br />
+        FROM ontime o <br />
+        GROUP BY o.Reporting_Airline <br />
+        ORDER BY MINUTOS_DE_RETRASO_POR_DIA ASC, CANT_VUELOS_POR_DIA DESC
       </p>
     </code>
+  </div>
+  <div class="column">
+    <p style=text-align:center>Gráfica representativa:</p>
+    <div id="chart4"></div>
+  </div>
+</div>
 
-    <br>
+<br><br>
 
-    <!-- Sexto Query -->
-    <h3 style="text-align: left">6.	¿Qué tan frecuentemente un vuelo sale tarde en comparación con la cantidad de vuelos, por culpa propia de la aerolínea?</h3>
-    <p>Nyan nyan nyan nyan nyan</p>
-    <code style="display: block; text-align:left">
+<!-- SEXTO QUERY -->
+<div style=text-align:center>
+  <h3>6.	¿Qué tan frecuentemente un vuelo sale tarde en comparación con la cantidad de vuelos, por culpa propia de la aerolínea?</h3>
+  <p style="text-align:justify">
+    Muchos vuelos son atrasados diariamente ya sea por la seguridad, el tráfico aereo, el clima o bien por culpa propia de la aerolínea. 
+    Este último aspecto nos hará saber con que frecuencia la aerolínea comete errores y en efecto atrasa el vuelo. Aquellas con
+    una menor proporicón, son las que operan más consistentemente.
+  </p>
+</div>
+
+<br>
+<div class="row">
+  <div class="column">
+    <p style=text-align:center>Resolución del query: </p>
+    <code style="display: block">
       <p>
         SELECT c.Description as AEROLINEA,CAST (count (*) AS float) / ( <br />
         &nbsp SELECT count(*) <br />
@@ -356,39 +327,164 @@ code {
         ORDER BY PROPORCION ASC;
       </p>
     </code>
+  </div>
+  <div class="column">
+    <p style=text-align:center>Gráfica representativa:</p>
+    <div id="chart6"></div>
+  </div>
+</div>
 
-    <br>
+<br><br>
 
-    <!-- Octavo Query -->
-    <h3 style="text-align: left">8.	¿Qué aerolíneas tienen la mayor cantidad de destinos?</h3>
-    <p>Juas juas juas juas juas juas juas</p>
-    <code style="display: block; text-align:left">
+<!-- SEPTIMO QUERY -->
+<div style=text-align:center>
+  <h3>7. ¿Qué aerolíneas han tenido un aumento en la realización de sus vuelos en los últimos n meses?</h3>
+  <p>Flujo laminar turbulento</p>
+</div>
+
+<br>
+<div class="row">
+  <div class="column">
+    <p style=text-align:center>Resolución del query: </p>
+    <code style="display: block">
       <p>
-        SELECT c.Description, count(DISTINCT o.DestCityName) as TOTAL <br />
+        SELECT o.Reporting_Airline, <br />
+        ( <br />
+        &nbsp ( <br />
+        &nbsp &nbsp ( <br />
+        &nbsp &nbsp &nbsp SELECT COUNT(*) <br />
+        &nbsp &nbsp &nbsp FROM ontime o1 <br />
+        &nbsp &nbsp &nbsp WHERE o1.Month = 11 and o1.Year = 2018  <br />
+        &nbsp &nbsp &nbsp &nbsp AND o.Reporting_Airline = o1.Reporting_Airline <br />
+        &nbsp &nbsp ) - <br />
+        &nbsp &nbsp ( <br />
+        &nbsp &nbsp &nbsp SELECT COUNT(*) <br />
+        &nbsp &nbsp &nbsp FROM ontime o2 <br />
+        &nbsp &nbsp &nbsp WHERE o2.Month = 1 and o2.Year = 2018  <br />
+        &nbsp &nbsp &nbsp &nbsp AND o.Reporting_Airline = o2.Reporting_Airline <br />
+        &nbsp &nbsp ) <br />
+        &nbsp ) * 1.0 / <br />
+        &nbsp ( <br />
+        &nbsp &nbsp SELECT COUNT(*) <br />
+        &nbsp &nbsp FROM ontime o3 <br />
+        &nbsp &nbsp WHERE o.Reporting_Airline = o3.Reporting_Airline <br />
+        &nbsp &nbsp &nbsp AND o3.Year = 2018 <br />
+        &nbsp &nbsp GROUP BY o3.Month <br />
+        &nbsp &nbsp ORDER BY COUNT(*) DESC <br />
+        &nbsp &nbsp LIMIT 1 <br />
+        &nbsp ) <br />
+        ) * 100 AS "PROPORCION_DE_AUMENTO" <br />
         FROM ontime o <br />
-        INNER JOIN carrier_history c ON o.Reporting_Airline = c.Code <br />
-        GROUP BY c.Code <br />
-        ORDER BY TOTAL DESC;
+        GROUP BY o.Reporting_Airline <br />
+        ORDER BY PROPORCION_DE_AUMENTO DESC;
       </p>
     </code>
+  </div>
+  <div class="column">
+    <p style=text-align:center>Gráfica representativa:</p>
+    <div id="chart4"></div>
+  </div>
+</div>
 
-    <br>
+<br><br>
 
-    <!-- Décimo Query -->
-    <h3 style="text-align: left">10. ¿Qué tan activa es una aerolínea en relación con su historial de tiempo operando?</h3>
-    <p>La pizza de Don Cangrejo es la mejor</p>
-    <code style="display: block; text-align:left">
+<!-- OCTAVO QUERY -->
+<div style=text-align:center>
+  <h3>8. ¿Qué aerolíneas recorren distancias más grandes?</h3>
+  <p style="text-align:justify">
+    Es un hecho que es más económico hacer escalas para llegar a un destino final, que viajar directamente a él.
+    Pero también sabemos, que es muy tedioso y tardado bajarse en cada aeropuerto solo para entrar a otro avión.
+    Este query tiene como finalidad saber qué aerolíneas viajan distancias más grandes y conocer cuales están dispuestas
+    a ahorrarnos múltiples paradas en múltiples aeropuertos.
+  </p>
+</div>
+
+<br>
+<div class="row">
+  <div class="column">
+    <p style=text-align:center>Resolución del query: </p>
+    <code style="display: block">
       <p>
+        SELECT ch.Description as AEROLINEA, MAX(o.Distance) as DIST <br />
+        FROM carrier_history ch <br />
+        INNER JOIN ontime o ON ch.Code = o.Reporting_Airline <br />
+        GROUP BY ch.Code <br />
+        ORDER BY DIST DESC;
+      </p>
+    </code>
+  </div>
+  <div class="column">
+    <p style=text-align:center>Gráfica representativa:</p>
+    <div id="chart8"></div>
+  </div>
+</div>
+
+<br><br>
+
+<!-- NOVENO QUERY -->
+<div style=text-align:center>
+  <h3>9. INSERTE PREGUNTA AQUÍ</h3>
+  <p>Tacocatacocatacocatocatacocatocatacocatocat</p>
+</div>
+
+<br>
+<div class="row">
+  <div class="column">
+    <p style=text-align:center>Resolución del query: </p>
+    <code style="display: block">
+      <p>
+        SELECT o.Reporting_Airline, <br />
+        ( <br />
+        &nbsp ( <br />
+        &nbsp &nbsp SELECT COUNT() <br />
+        &nbsp &nbsp FROM ontime o3 <br />
+        &nbsp &nbsp WHERE o.Reporting_Airline = o3.Reporting_Airline <br />
+        &nbsp &nbsp &nbsp AND o3.Year = 2018 <br />
+        &nbsp &nbsp GROUP BY o3.Month, o3.DayofMonth <br />
+        &nbsp ) * 1.0 / 334 <br />
+        ) AS "CANT_VUELOS_POR_DIA" <br />
+        FROM ontime o <br />
+        GROUP BY o.Reporting_Airline <br />
+        ORDER BY CANT_VUELOS_POR_DIA DESC;
+      </p>
+    </code>
+  </div>
+  <div class="column">
+    <p style=text-align:center>Gráfica representativa:</p>
+    <div id="chart4"></div>
+  </div>
+</div>
+
+<br><br>
+
+<!-- DECIMO QUERY -->
+<div style=text-align:center>
+  <h3>10. ¿Qué tan activa ha sido una aerolínea en los últimos tres meses?</h3>
+  <p>Para hacer uso de nuestro conocimiento financiero, es importante evaluar el desempeño actual de cada empresa.
+    Por ello, un análisis de los últimos tres meses nos harán saber si la aerolínea tiene tendencia a hacer vuelos
+    constantemente o no; está será una buena forma de decidir si invertir en una aerlínea.
+  </p>
+</div>
+
+<br>
+<div class="row">
+  <div class="column">
+    <p style=text-align:center>Resolución del query: </p>
+    <code style="display: block">
+      <p style="text-align:justify">
         SELECT ch.Description as AEROLINEA, CAST (count(*)/3 as float) as PROM_3M <br />
         FROM carrier_history ch <br />
         INNER JOIN ontime o ON ch.Code = o.Reporting_Airline <br />
-        WHERE o.Year = 2018 AND o.Month > 9 <br />
+        WHERE o.Year = 2018 AND o.Month >= 9 <br />
         GROUP BY o.Reporting_Airline <br />
         ORDER BY PROM_3M DESC;
       </p>
     </code>
-
+  </div>
+  <div class="column">
+    <p style=text-align:center>Gráfica representativa:</p>
+    <div id="chart10"></div>
   </div>
 </div>
 
-<br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br>

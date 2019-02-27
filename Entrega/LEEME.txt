@@ -1,22 +1,25 @@
 Universidad del Valle de Guatemala
-Bases de Datos - SecciÛn 10
+Bases de Datos - Secci√≥n 10
 Fecha: 27/02/19
 
 Estudiantes:
-Oscar Ju·rez - 17315
-JosÈ Cifuentes - 17509
+Oscar Ju√°rez - 17315
+Jos√© Cifuentes - 17509
 
 
 				ESPECIFICACIONES NECESESARIAS
 
 EN CUANTO A LA ENTREGA DEL PROYECTO:
-El an·lisis, introducciÛn, conclusiÛn, etc. fue hecho en p·gina web. Para no adjuntar la p·gina como tal junto con todos sus archivos, se generÛ un pdf con todas las vistas de la p·gina. Cabe mencionar que la resoluciÛn no es la misma, por lo que el diagrama entidad relaciÛn fue entregado por tambiÈn por aparte con el nombre 'Diagrama Entidad Relacion.png'.
+El an√°lisis, introducci√≥n, conclusi√≥n, etc. fue hecho en p√°gina web. Para no adjuntar la p√°gina como tal junto con todos sus archivos, se gener√≥ un pdf con todas las vistas de la p√°gina. Cabe mencionar que la resoluci√≥n no es la misma, por lo que el diagrama entidad relaci√≥n fue entregado por tambi√©n por aparte con el nombre 'Diagrama Entidad Relacion.png'.
 
 JUPYTER NOTEBOOK:
-Este viene incluÌdo en el archivo comprimido, de igual forma, los queries se encuentran en la parte analÌtica de la presentaciÛn web.
+Este viene inclu√≠do en el archivo comprimido, de igual forma, los queries se encuentran en la parte anal√≠tica de la presentaci√≥n web.
 
-GR¡FICAS GENERADAS:
-Las gr·ficas se encuentran en la p·gina web tambiÈn y hay una respectiva para cada query.
+GR√ÅFICAS GENERADAS:
+Las gr√°ficas se encuentran en la p√°gina web tambi√©n y hay una respectiva para cada query.
 
+LINK AL REPOSITORIO:
+Si se desea dar seguimiento a la creaci√≥n de la p√°gina web, junto con otros avances, el link del repositorio en GitHub es el siguiente:
+https://github.com/OJP98/Proyecto1-BD
 
-°Gracias por su atenciÛn!
+¬°Gracias por su atenci√≥n!

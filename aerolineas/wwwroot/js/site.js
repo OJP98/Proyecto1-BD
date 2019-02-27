@@ -1,6 +1,7 @@
-﻿google.charts.load('current', { packages: ['corechart', 'bar'] });
+﻿google.charts.load('current', { packages: ['corechart', 'bar', 'table'] });
 
 google.charts.setOnLoadCallback(drawChart);
+google.charts.setOnLoadCallback(drawTable);
 
 function drawChart() {
 
@@ -78,11 +79,11 @@ function drawChart() {
 
     var data9 = google.visualization.arrayToDataTable([
         ['Nombre', 'Cant. Vuelos', { role: 'style' }],
-        ['Southwest Airlines Co.',11.33, 'blue'],
+        ['Southwest Airlines Co.', 11.33, 'blue'],
         ['American Airlines Inc.', 7.39, 'green'],
-        ['Delta Air Lines Inc.',5.40, 'gold'],
-        ['SkyWest Airlines Inc.', 5.14 , 'silver'],
-        ['United Air Lines Inc.', 4.73 , 'red'],
+        ['Delta Air Lines Inc.', 5.40, 'gold'],
+        ['SkyWest Airlines Inc.', 5.14, 'silver'],
+        ['United Air Lines Inc.', 4.73, 'red'],
     ]);
 
     var data10 = google.visualization.arrayToDataTable([
@@ -93,7 +94,6 @@ function drawChart() {
         ['American Airlines Inc.', 76218, 'red'],
         ['American Eagle Airlines Inc.', 75576, 'silver']
     ])
-
 
     var options1 = {
         title: 'Proporción de top 5 aerolíneas',
@@ -205,8 +205,19 @@ function drawChart() {
     chart8.draw(data8, options8);
     chart9.draw(data9, options9);
     chart10.draw(data10, options10);
+}
 
+function drawTable() {
 
+    var Tabla = new google.visualization.DataTable();
+    Tabla.addColumn('string', 'Nombre de la Aerolínea');
+    Tabla.addRows([
+        ['United Air Lines Inc.'],
+        ['Delta Air Lines Inc.'],
+        ['SkyWest Airlines Inc.']
+    ]);
 
+    var table = new google.visualization.Table(document.getElementById('top3'));
 
-}    
+    table.draw(Tabla, { showRowNumber: true, width: '40%', height: '100%' });
+}

@@ -92,3 +92,4 @@ C:\Users\Usuario\Documents\VS Projects\Proyecto1-BD\aerolineas\obj\Debug\netcore
 C:\Users\Usuario\Documents\VS Projects\Proyecto1-BD\aerolineas\obj\Debug\netcoreapp2.2\Razor\Views\Home\Contacto.g.cshtml.cs
 C:\Users\wuser\Documents\UVG\3er Año\Base de Datos\Proyecto\Proyecto1-BD\aerolineas\obj\Debug\netcoreapp2.2\Razor\Views\Home\Conclusion.g.cshtml.cs
 C:\Users\wuser\Documents\UVG\3er Año\Base de Datos\Proyecto\Proyecto1-BD\aerolineas\obj\Debug\netcoreapp2.2\Razor\Views\Home\Contacto.g.cshtml.cs
+C:\Users\Usuario\Documents\VS Projects\Proyecto1-BD\aerolineas\obj\Debug\netcoreapp2.2\Razor\Views\Home\Diagrama.g.cshtml.cs

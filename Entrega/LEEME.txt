@@ -1,0 +1,22 @@
+Universidad del Valle de Guatemala
+Bases de Datos - Sección 10
+Fecha: 27/02/19
+
+Estudiantes:
+Oscar Juárez - 17315
+José Cifuentes - 17509
+
+
+				ESPECIFICACIONES NECESESARIAS
+
+EN CUANTO A LA ENTREGA DEL PROYECTO:
+El análisis, introducción, conclusión, etc. fue hecho en página web. Para no adjuntar la página como tal junto con todos sus archivos, se generó un pdf con todas las vistas de la página. Cabe mencionar que la resolución no es la misma, por lo que el diagrama entidad relación fue entregado por también por aparte con el nombre 'Diagrama Entidad Relacion.png'.
+
+JUPYTER NOTEBOOK:
+Este viene incluído en el archivo comprimido, de igual forma, los queries se encuentran en la parte analítica de la presentación web.
+
+GRÁFICAS GENERADAS:
+Las gráficas se encuentran en la página web también y hay una respectiva para cada query.
+
+
+¡Gracias por su atención!
